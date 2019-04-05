@@ -4,7 +4,7 @@ ENV  PDNSMANAGER_VERSION 2.0.1
 ENV  PDNSMANAGER_ARCHIVE=pdnsmanager-${PDNSMANAGER_VERSION}.tar.gz
 ENV  PDNSMANAGER_DOWNLOAD_URL=https://dl.pdnsmanager.org/${PDNSMANAGER_ARCHIVE}
 
-RUN apk add apache2 apache2-ctl php7-apache2 php7 php7-mysqli php7-pdo php7-pdo_mysql php7-json php7-pecl-apcu mariadb-client bash && \
+RUN apk add curl apache2 apache2-ctl php7-apache2 php7 php7-mysqli php7-pdo php7-pdo_mysql php7-json php7-pecl-apcu mariadb-client bash && \
     mkdir /var/www/html && \
     curl --output pdnsmanager.tar.gz --location ${PDNSMANAGER_DOWNLOAD_URL} \ 
     tar -C /var/www/html --strip-components=1 -xzf /tmp/$PDNSMANAGER_ARCHIVE pdnsmanager-${PDNSMANAGER_VERSION}/backend  pdnsmanager-${PDNSMANAGER_VERSION}/frontend && \
