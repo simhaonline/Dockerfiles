@@ -10,7 +10,7 @@ ENV POWERDNS_VERSION=4.1.7 \
     MYSQL_PASS="root" \
     MYSQL_DB="pdns"
 
-RUN apk --update add libpq sqlite-libs libstdc++ libgcc mariadb-client mariadb-client-libs && \
+RUN apk --update add libpq sqlite-libs libstdc++ libgcc mariadb-client && \
     apk add --virtual build-deps \
       g++ make mariadb-dev postgresql-dev sqlite-dev curl boost-dev && \
     curl -sSL https://downloads.powerdns.com/releases/pdns-$POWERDNS_VERSION.tar.bz2 | tar xj -C /tmp && \
