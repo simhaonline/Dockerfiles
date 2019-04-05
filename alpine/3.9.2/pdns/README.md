@@ -22,21 +22,26 @@
 
 ```shell
 # Start a MySQL Container
-$ docker run -d \
-  --name pdns-mysql \
-  -e MYSQL_ROOT_PASSWORD=supersecret \
-  -v $PWD/mysql-data:/var/lib/mysql \
-  mariadb:10.1
+$ docker build -t alpine-pdns:4.1.7 .
 
-$ docker run --name pdns \
+$ docker run \
+  --detach \
+  --name pdns-mysql \
+  --env MYSQL_ROOT_PASSWORD=S1mhA@ZOIG \
+  --volume /srv/pdns/mysql-data:/var/lib/mysql \
+  mariadb:10.1
+  
+$ docker run \
+  --detach \
+  --name pdns \
   --link pdns-mysql:mysql \
-  -p 53:53 \
-  -p 53:53/udp \
-  -e MYSQL_USER=root \
-  -e MYSQL_PASS=supersecret \
-  psitrax/powerdns \
+  --publish 53:53/tcp \
+  --publish 53:53/udp \
+  --env MYSQL_USER=root \
+  --env MYSQL_PASS=S1mhA@ZOIG \
+  alpine-pdns:4.1.7 \
     --cache-ttl=120 \
-    --allow-axfr-ips=127.0.0.1,123.1.2.3
+    --allow-axfr-ips=127.0.0.1,51.158.120.35,10.5.74.169
 ```
 
 ## Configuration
