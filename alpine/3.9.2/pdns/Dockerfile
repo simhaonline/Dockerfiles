@@ -30,6 +30,8 @@ ADD schema.sql pdns.conf /etc/pdns/
 
 ADD entrypoint.sh /
 
+RUN chmod +x /entrypoint.sh 
+
 EXPOSE 53/tcp 53/udp
 
 ENTRYPOINT ["/entrypoint.sh"]
